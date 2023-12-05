@@ -1,3 +1,4 @@
+## Author: Marianyela Petrizzelli
 ## generate the data to be visualized:
 ## it may take some time 
 source(paste(getwd(), 'functions.R', sep = "/"))

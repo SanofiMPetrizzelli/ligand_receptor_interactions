@@ -1,3 +1,4 @@
+# Author: Marianyela Petrizzelli
 ## load library 
 library(shiny)
 library(igraph)

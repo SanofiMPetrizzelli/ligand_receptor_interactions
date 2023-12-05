@@ -6,6 +6,7 @@
 #
 #    http://shiny.rstudio.com/
 #
+# Author: Marianyela Petrizzelli
 source(paste(getwd(), 'functions.R', sep = "/"))
 load(paste(getwd(),'.RData', sep = "/"))
 
