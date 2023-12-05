@@ -9,10 +9,6 @@
 source(paste(getwd(), 'functions.R', sep = "/"))
 load(paste(getwd(),'.RData', sep = "/"))
 
-interaction_tab = load_data(data_dir = "/cloud-home/I0558001/Signaling")
-cell_type = vec_cell_type(interaction_tab)[c(4, 7, 23, 26, 24, 6, 22, 30, 9)]
-tab_indx_lab = indx_lab(cell_type)
-lab_interaction = tab_indx_lab[, "lab"]
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -24,9 +20,9 @@ ui <- fluidPage(
         selectInput("data", "Select cell type interaction", 
                       choices = as.vector(lab_interaction)),
         # slider input for pvalue 
-        selectInput("pval","p-value cutoff:", choices=c(0.01, 0.02, 0.05), selected = 0.01),# width= "50%")
+        selectInput("pval","p-value cutoff:", choices=set_pvalues, selected = 0.01),# width= "50%")
          
-        selectInput("qval","q-value cutoff:", choices=c(0.01, 0.02, 0.05), selected = 0.01),# width ="50%")
+        selectInput("qval","q-value cutoff:", choices=set_qvalues, selected = 0.01),# width ="50%")
         
         sliderInput("ncat","Number of BF", min=1, max= 15, value = 5)
     ),

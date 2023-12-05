@@ -27,6 +27,24 @@ indx_lab = function(cell_type){
   return(indx_lab)
 }
 
+build_interaction_networks <- function(cell_cell_interaction_table_file){
+  links_tumor_specific_spatial <- read_csv(cell_cell_interaction_table_file)
+  from_ligand = paste0(links_tumor_specific_spatial$from,"_",  links_tumor_specific_spatial$ligand)
+  to_receptor = paste0(links_tumor_specific_spatial$to, "_", links_tumor_specific_spatial$receptor)
+  edge_link = cbind(links_tumor_specific_spatial, from_ligand, to_receptor)
+  write_csv(edge_link, file = "edge_link.csv", quote = "none")
+
+  node_table = unique(c(from_ligand, to_receptor))
+  descr = lapply(strsplit(node_table, split = "_"), function(x){
+    return(c(cell_type = x[1], gene = x[length(x)]))
+  })
+  descr = do.call(rbind, descr)
+  node_table = cbind(node_table, descr)
+  node.table = as.data.frame(node_table)
+  write_csv(node.table, file = "node_table.csv", quote = "none")
+}
+
+
 load_data <- function(data_dir){
   edge_table <- read_csv(paste(data_dir, "edge_table.csv", sep="/"))
   node_table <- read_csv(paste(data_dir,"node_table.csv", sep="/"))
